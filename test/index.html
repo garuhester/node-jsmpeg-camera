@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>camera test</title>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style type="text/css">
+            html,
+            body {
+                background-color: rgb(134, 134, 134);
+                margin: 0px;
+                padding: 0px;
+            }
+            #cameras {
+                padding: 5px;
+                box-sizing: border-box;
+            }
+            .camera {
+                position: relative;
+                float: left;
+                width: 33.3%;
+                padding: 5px;
+                box-sizing: border-box;
+                font-size: 0px;
+            }
+            .camera canvas {
+                width: 100%;
+                background: #000;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="cameras"></div>
+        <script type="text/javascript" src="jsmpeg.min.js"></script>
+        <script type="text/javascript">
+            var wsUrl = "ws://127.0.0.1:5000";
+            var rtspUrls = [
+                "rtsp://admin:wewin123456@172.16.38.51:554/h264/ch1/main/av_stream",
+                "rtsp://admin:wewin123456@172.16.38.52:554/h264/ch1/main/av_stream",
+                "rtsp://admin:wewin123456@172.16.38.53:554/h264/ch1/main/av_stream",
+                "rtsp://admin:wewin123456@172.16.38.54:554/h264/ch1/main/av_stream",
+                "rtsp://admin:wewin123456@172.16.38.55:554/h264/ch1/main/av_stream",
+                "rtsp://admin:wewin123456@172.16.100.236:554/h264/ch1/main/av_stream",
+            ];
+            var cameras = document.getElementById("cameras");
+            for (let i = 0; i < rtspUrls.length; i++) {
+                const element = rtspUrls[i];
+                cameras.innerHTML += `
+                <div class="camera">
+                    <canvas id="video-canvas${i}"></canvas>
+                </div>
+                `;
+                new JSMpeg.Player(wsUrl + `?url=${element}`, { canvas: document.getElementById("video-canvas" + i) });
+            }
+        </script>
+    </body>
+</html>

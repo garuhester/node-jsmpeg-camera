@@ -1,0 +1,10 @@
+{
+    "name": "node-jsmpeg-camera",
+    "version": "1.0.0",
+    "description": "node-jsmpeg-camera",
+    "main": "app.js",
+    "author": "xiaohu",
+    "dependencies": {
+        "ws": "7.1.2"
+    }
+}
